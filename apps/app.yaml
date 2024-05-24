@@ -1,0 +1,27 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: tonykubevelasa
+spec:
+  components:
+    - name: tonykubevelasa
+      type: azure-storage-account
+      properties:
+        create_rsg: false
+        resource_group_name: ""
+        location: ""
+        name: ""
+        tags: |
+          {
+            ApplicationName       = "Application01"
+            Terraform             = "Yes"
+          } 
+        static_website: |
+          [{
+            index_document = "index.html"
+            error_404_document = "index.html"
+          }]
+
+        writeConnectionSecretToRef:
+          name: storage-account-dev
+          namespace: vela-system
